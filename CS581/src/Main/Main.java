@@ -10,8 +10,6 @@ public class Main {
 
 		dbTier db = new dbTier();
 		
-		int testgit=0;
-		int testgit2=0;
 
 		String sql = "select * from sfpark_node";
 		ResultSet rs = db.ExecuteNonScalarQuery(sql);
