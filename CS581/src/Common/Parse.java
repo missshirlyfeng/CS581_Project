@@ -1,6 +1,5 @@
 package Common;
 
-import java.util.ArrayList;
 
 public class Parse {
 
