@@ -2,8 +2,9 @@ package Main;
 
 import java.util.ArrayList;
 
-import Storage.AdjMatrixGraph;
 import Common.Query;
+import GraphAlgorithm.Graph;
+import Storage.AdjMatrixGraph;
 
 public class Main {
 	public static void main(String[] args) {
@@ -45,27 +46,8 @@ public class Main {
 
 		int V = qry.GetNodeNumber();
 		int E = qry.GetEdgeNumber();
-		AdjMatrixGraph G = new AdjMatrixGraph(V);
-		int node_id = 7001;
-		for (int i = 0; i < V; ++i) {
-			int node1 = node_id + i;
-			// node i has no adjacent node. Continue to update the next node's
-			// adjNodes
-			if (qry.GetAdjNodes(node1).size() == 0) {
-				continue;
-			}
-			for (int j = 0; j < V; ++j) {
-
-				// record the weight of from the current node to the adjacent
-				// one
-				ArrayList<Integer> adjNodes = qry.GetAdjNodes(node1);
-				for (Integer node2 : adjNodes) {
-					G.addEdge(i, node2 - node_id, Float.valueOf(qry
-							.getShortestBlockStringField("distance", node1,
-									node2)));
-				}
-			}
-		}
+		Graph G = new Graph(V);
+		G.UpdateFromDB();
 		G.PrintWeightMatrix();
 	}
 }

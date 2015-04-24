@@ -21,6 +21,7 @@ public class AdjMatrixGraph {
 			}
 		}
 	}
+	
 
 	// number of vertices and edges
 	public int V() {
