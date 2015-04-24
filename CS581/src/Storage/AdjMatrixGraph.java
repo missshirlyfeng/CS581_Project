@@ -8,6 +8,9 @@ public class AdjMatrixGraph {
 	private int E;
 	private float[][] adj;
 
+
+
+
 	// empty graph with V vertices
 	public AdjMatrixGraph(int V) {
 		if (V < 0)
@@ -30,6 +33,15 @@ public class AdjMatrixGraph {
 
 	public int E() {
 		return E;
+	}
+	
+	public float getCell(int v, int w) {
+		return adj[v][w];
+	}
+
+
+	public void setCell(int v, int w,int weight) {
+		this.adj[v][w] = weight;
 	}
 
 	// add undirected edge v-w
@@ -94,33 +106,14 @@ public class AdjMatrixGraph {
 		StringBuilder s = new StringBuilder();
 		s.append(V + " " + E + NEWLINE);
 		for (int v = 0; v < V; v++) {
-			int tmpv = v + 1;
-			s.append(tmpv + ": ");
+			s.append(v + ": ");
 			for (int w : adj(v)) {
-				int tmpw = w + 1;
-				s.append(tmpw + " ");
+				s.append(w + " ");
 			}
 			s.append(NEWLINE);
 		}
 		System.out.print(s.toString());
 	}
 
-	// string representation of Graph - takes quadratic time
-	public void PrintWeightMatrix() {
-		String NEWLINE = System.getProperty("line.separator");
-		StringBuilder s = new StringBuilder();
-		s.append(V + " " + E + NEWLINE);
-		for (int v = 0; v < V; v++) {
-			int tmpv = v + 1;
-			s.append(tmpv + ": ");
-			for (int w : adj(v)) {
-				int tmpw = w + 1;
-				s.append(tmpw + "(");
-				s.append(adj[v][w] + ") ");
-			}
-			s.append(NEWLINE);
-		}
-		System.out.print(s.toString());
-	}
 
 }

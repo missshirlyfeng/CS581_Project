@@ -36,4 +36,41 @@ public class Graph extends AdjMatrixGraph{
 			}
 		}
 	}
+
+	@Override
+	public void PrintNodesRelation() {
+		// TODO Auto-generated method stub
+		String NEWLINE = System.getProperty("line.separator");
+		StringBuilder s = new StringBuilder();
+		s.append(super.V() + " " + super.E() + NEWLINE);
+		for (int v = 0; v < super.V(); v++) {
+			int tmpv = v + 1;
+			s.append(tmpv + ": ");
+			for (int w : adj(v)) {
+				int tmpw = w + 1;
+				s.append(tmpw + " ");
+			}
+			s.append(NEWLINE);
+		}
+		System.out.print(s.toString());
+	}
+
+	public void PrintWeightMatrix() {
+		// TODO Auto-generated method stub
+		String NEWLINE = System.getProperty("line.separator");
+		StringBuilder s = new StringBuilder();
+		s.append(super.V() + " " + super.E() + NEWLINE);
+		for (int v = 0; v < super.V(); v++) {
+			int tmpv = v + 1;
+			s.append(tmpv + ": ");
+			for (int w : adj(v)) {
+				int tmpw = w + 1;
+				s.append(tmpw + "(");
+				s.append(super.getCell(tmpv, tmpw) + ") ");
+			}
+			s.append(NEWLINE);
+		}
+		System.out.print(s.toString());
+	}
+	
 }
