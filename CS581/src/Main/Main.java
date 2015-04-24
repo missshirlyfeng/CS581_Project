@@ -8,7 +8,7 @@ import Storage.AdjMatrixGraph;
 
 public class Main {
 	public static void main(String[] args) {
-
+//        syso
 		// dbTier db = new dbTier();
 		//
 		//
