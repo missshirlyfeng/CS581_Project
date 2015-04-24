@@ -66,7 +66,7 @@ public class Graph extends AdjMatrixGraph{
 			for (int w : adj(v)) {
 				int tmpw = w + 1;
 				s.append(tmpw + "(");
-				s.append(super.getCell(tmpv, tmpw) + ") ");
+				s.append(super.getCell(v, w) + ") ");
 			}
 			s.append(NEWLINE);
 		}
