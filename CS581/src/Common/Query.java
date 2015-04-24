@@ -74,10 +74,9 @@ public class Query {
 		}
 		return str;
 	}
-	
-	public int getShortestBlockIntField(String fieldName, int node1,
-			int node2) {
-		int result=0;
+
+	public int getShortestBlockIntField(String fieldName, int node1, int node2) {
+		int result = 0;
 		ResultSet rs = GetShortestBlockInfo(node1, node2);
 
 		try {
@@ -90,6 +89,57 @@ public class Query {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public ArrayList<ArrayList<Integer>> GetIntersByBlockID(int block_id) {
+		StringBuilder sql = new StringBuilder();
+		String outFieldName = "node_id_1,node_id_2";
+		String inputFieldName = "block_id";
+		String tableName = "sfpark_edge";
+		String[] outFileds = Parse.SplitString(outFieldName, ",");
+		ArrayList<ArrayList<Integer>> adjNodes = new ArrayList<ArrayList<Integer>>();
+		sql.append("select ");
+		sql.append(outFieldName);
+		sql.append(" from ");
+		sql.append(tableName);
+		sql.append(" where ");
+		sql.append(inputFieldName);
+		sql.append("=");
+		sql.append(block_id);
+		adjNodes = GetRowswithMutipleFields(sql, outFileds);
+		return adjNodes;
+	}
+
+	public int GetNodeNumber() {
+		int number = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select count(*) from sfpark_node");
+		ResultSet rs = db.ExecuteNonScalarQuery(sql.toString());
+		try {
+			while (rs.next()) {
+				number = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return number;
+	}
+
+	public int GetEdgeNumber() {
+		int number = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select count(*) from sfpark_edge");
+		ResultSet rs = db.ExecuteNonScalarQuery(sql.toString());
+		try {
+			while (rs.next()) {
+				number = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return number;
 	}
 
 	private ArrayList<Integer> GetIntArrayList(StringBuilder sql,
@@ -105,6 +155,26 @@ public class Query {
 			e.printStackTrace();
 		}
 		return intArrayList;
+
+	}
+
+	private ArrayList<ArrayList<Integer>> GetRowswithMutipleFields(
+			StringBuilder sql, String[] outFieldNames) {
+		ArrayList<ArrayList<Integer>> rows = new ArrayList<ArrayList<Integer>>();
+		ResultSet rs = db.ExecuteNonScalarQuery(sql.toString());
+		try {
+			while (rs.next()) {
+				ArrayList<Integer> fields = new ArrayList<Integer>();
+				for (String str : outFieldNames) {
+					fields.add(rs.getInt(str));
+				}
+				rows.add(fields);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rows;
 
 	}
 
